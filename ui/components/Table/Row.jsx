@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import CellItem from "./CellItem";
 import {classNames} from "../../utils";
-import Table from "./index";
 import Checkbox from "../Checkbox";
 
 /**

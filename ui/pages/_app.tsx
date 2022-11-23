@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type {AppProps} from 'next/app';
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client";
-import Index from "../components/Layout";
+import Layout from "../components/Layout";
 
 const client = new ApolloClient({
     uri: 'http://localhost:8080/graphql',
@@ -11,9 +11,9 @@ const client = new ApolloClient({
 const App = ({Component, pageProps}: AppProps) => {
     return (
         <ApolloProvider client={client}>
-            <Index>
+            <Layout>
                 <Component {...pageProps} />
-            </Index>
+            </Layout>
         </ApolloProvider>
     )
 };

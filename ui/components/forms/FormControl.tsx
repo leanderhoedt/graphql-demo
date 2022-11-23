@@ -1,9 +1,20 @@
-import {forwardRef, useContext} from 'react';
+import {forwardRef, useContext, ElementType} from 'react';
 import {ErrorMessage} from '@hookform/error-message';
 import FormContext from './FormContext';
 import {classNames} from '../../utils';
 
-const FormControl = forwardRef(({
+interface FormControlProps {
+	type?: string;
+	id?: string;
+	name: string;
+	readOnly?: boolean;
+	disabled?: boolean;
+	as?: ElementType;
+	value?: string | string[] | number;
+	size?: "sm" | "md";
+	errors: object
+}
+const FormControl = forwardRef<HTMLInputElement, FormControlProps>(({
 																	type,
 																	id,
 																	name,
