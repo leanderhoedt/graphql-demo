@@ -1,8 +1,15 @@
-import {useEffect} from "react";
-import PropTypes from "prop-types";
+import {useEffect, ReactNode} from "react";
 import {useForm} from "react-hook-form";
 import Button from "../Button";
 import PropertiesForm from "./PropertiesGrid";
+
+interface PropertiesProps {
+	title?: string;
+	children?: ReactNode[] | ReactNode;
+	fields?: unknown[];
+	values?: object;
+	onSubmit(...args: unknown[]): unknown;
+}
 
 /**
  * The Properties component is a panel with a form and submit button
@@ -15,7 +22,13 @@ import PropertiesForm from "./PropertiesGrid";
  * @returns {JSX.Element}
  * @constructor
  */
-const Properties = ({title, children, fields, values, onSubmit}) => {
+const Properties = ({
+											title,
+											children,
+											fields,
+											values,
+											onSubmit
+										}: PropertiesProps) => {
 	const {
 		control,
 		reset,
@@ -60,17 +73,6 @@ const Properties = ({title, children, fields, values, onSubmit}) => {
 			</div>
 		</form>
 	)
-}
-
-Properties.propTypes = {
-	title: PropTypes.string,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node
-	]),
-	fields: PropTypes.array,
-	values: PropTypes.object,
-	onSubmit: PropTypes.func.isRequired
 }
 
 export default Properties;

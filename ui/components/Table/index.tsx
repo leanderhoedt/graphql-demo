@@ -1,9 +1,18 @@
 import {useLayoutEffect, useRef, useState} from "react";
-import PropTypes from "prop-types";
 import HeaderItem from "./HeaderItem";
 import Row from "./Row";
 import Checkbox from "../Checkbox";
 import Button from "../Button";
+
+interface TableProps {
+	columns: {
+		field: string,
+			title: string
+	}[];
+	data: unknown[] // also needs required ID field !!;
+	selected?: string[];
+	setSelected?(...args: unknown[]): unknown;
+}
 
 /**
  * Table component to render columns with header and render the data
@@ -15,7 +24,12 @@ import Button from "../Button";
  * @returns {JSX.Element}
  * @constructor
  */
-const Table = ({columns, data = [], selected = [], setSelected}) => {
+const Table = ({
+								 columns,
+								 data = [],
+								 selected = [],
+								 setSelected
+							 }: TableProps) => {
 	const checkbox = useRef();
 	const [checked, setChecked] = useState(false);
 	const [indeterminate, setIndeterminate] = useState(false);
@@ -41,11 +55,6 @@ const Table = ({columns, data = [], selected = [], setSelected}) => {
 				<div className="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
 					{selected.length > 0 && (
 						<div className="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-gray-50 sm:left-16">
-							{/*<Button
-						size="xs"
-					>
-						Bulk edit
-					</Button>*/}
 							<Button
 								size="xs"
 							>
@@ -92,18 +101,6 @@ const Table = ({columns, data = [], selected = [], setSelected}) => {
 			</div>
 		</>
 	)
-}
-
-Table.propTypes = {
-	columns: PropTypes.arrayOf(
-		PropTypes.shape({
-			field: PropTypes.string.isRequired,
-			title: PropTypes.string.isRequired,
-		})
-	).isRequired, // also needs required ID field !!
-	data: PropTypes.array.isRequired,
-	selected: PropTypes.arrayOf(PropTypes.string),
-	setSelected: PropTypes.func
 }
 
 export default Table;

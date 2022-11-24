@@ -1,10 +1,20 @@
 import {Controller} from "react-hook-form";
-import PropTypes from "prop-types";
 import FormControl from "../forms/FormControl";
 import FormGroup from "../forms/FormGroup";
 import FormLabel from "../forms/FormLabel";
 
-const PropertyEditor = ({name, editor = 'text', title, ...props}) => {
+interface PropertyEditorProps {
+	name: string
+	editor?: string;
+	title?: string;
+}
+
+const PropertyEditor = ({
+							name,
+							editor = 'text',
+							title,
+							...props
+						}: PropertyEditorProps) => {
 	let components = {
 		text: ({control, editorParams}) => {
 			return (
@@ -55,11 +65,6 @@ const PropertyEditor = ({name, editor = 'text', title, ...props}) => {
 		</FormGroup>
 	)
 
-}
-
-PropertyEditor.propTypes = {
-	editor: PropTypes.string,
-	title: PropTypes.string,
 }
 
 export default PropertyEditor;

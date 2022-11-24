@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ChangeEvent, ReactNode} from "react";
 import {classNames} from '../../utils';
 
 interface ButtonProps {
@@ -7,7 +7,7 @@ interface ButtonProps {
     children?: ReactNode[] | ReactNode;
     startIcon?: ReactNode[] | ReactNode;
 
-    onClick?(...args: unknown[]): unknown;
+    onClick?: (e: ChangeEvent<HTMLInputElement>) => void;
 
     type?: "submit" | "button";
     size?: "xs" | "sm" | "md" | "lg" | "xl";
