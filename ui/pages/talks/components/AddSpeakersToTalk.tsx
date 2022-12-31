@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-import PropTypes from "prop-types";
 import {gql, useMutation, useQuery} from "@apollo/client";
 import SelectMenu from "../../../components/SelectMenu";
 import SpeakerItem from "./SpeakerItem";
