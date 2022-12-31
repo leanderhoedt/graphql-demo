@@ -4,6 +4,26 @@ import {gql, useMutation, useQuery} from "@apollo/client";
 import SelectMenu from "../../../components/SelectMenu";
 import SpeakerItem from "./SpeakerItem";
 
+interface AddSpeakersToTalkProps {
+  id: number;
+}
+
+interface GetPersonsData {
+  persons: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
+interface GetSpeakersByTalkData {
+  talk: {
+    speakers: Array<{
+      id: number;
+      name: string;
+    }>;
+  };
+}
+	  
 const GET_PERSONS = gql`
 	query GetPersons {
 		persons {
@@ -32,18 +52,18 @@ const ADD_SPEAKER_TO_TALK = gql`
 	}
 `;
 
-const AddSpeakersToTalk = ({id}) => {
+const AddSpeakersToTalk = ({id}: AddSpeakersToTalkProps) => {
 	const [selectedSpeaker, setSelectedSpeaker] = useState();
 	const {
 		loading: personsLoading,
 		error: personsError,
-		data: {persons = []} = {}
+		data: {persons = []} = {} as GetPersonsData
 	} = useQuery(GET_PERSONS);
 
 	const {
 		loading: talkSpeakersLoading,
 		error: talkSpeakersError,
-		data: {talk: {speakers: talkSpeakers = []} = {}} = {}
+		data: {talk: {speakers: talkSpeakers = []} = {}} = {} as GetSpeakersByTalkData
 	} = useQuery(GET_SPEAKERS_BY_TALK, {
 		skip: !id,
 		variables: {id},
@@ -104,9 +124,5 @@ const AddSpeakersToTalk = ({id}) => {
 		</div>
 	)
 }
-
-AddSpeakersToTalk.propTypes = {
-	id: PropTypes.string,
-};
 
 export default AddSpeakersToTalk;
